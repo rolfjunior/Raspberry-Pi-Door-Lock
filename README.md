@@ -24,37 +24,50 @@ https://github.com/ondryaso/pi-rc522
 	2.3 - python setup.py install
 
 3.Clone the code from git and copy all the files in your raspberry pi under /home/pi
-	3.1 - sudo git clone https://github.com
+	3.1 - sudo git clone https://github.com/rolfjunior/Raspberry-Pi-Door-Lock
   
-4.A door_lock_pi folder will be created with the files inside of it move the files to /home/pi
+4.A XXXXXX folder will be created with the files inside of it move the files to /home/pi
 Using file manager do copy and paste or
 	4.1 - sudo cp /home/pi/door_lock_pi/locker.py /home/pi/
 	4.2 - sudo cp /home/pi/door_lock_pi/start_lock.sh /home/pi/
 	4.3 - sudo cp /home/pi/door_lock_pi/card_data.json /home/pi/
 	4.4 - sudo cp /home/pi/door_lock_pi/door_lock.py /home/pi/
 	4.5 - sudo cp /home/pi/door_lock_pi/servolock.py /home/pi/
-
+	4.6 - sudo cp /home/pi/door_lock_pi/blynk.py /home/pi/
+	4.7 - sudo cp /home/pi/door_lock_pi/lockstate.pickle /home/pi/
 
 5.Delete the files on the original folder
-	5.1 - to delete all sudo rm /home/pi/door_lock_pi/*
-	5.2 - to delete one file sudo rm /home/pi/door_lock_pi/door_lock.py
+	5.1 - to delete all sudo rm /home/pi/XXXXXX/*
+	5.2 - to delete one file sudo rm /home/pi/XXXXXXXX/door_lock.py
 
-6. Edit crontab
-	6.1 - crontab -e
-	6.2 - add the line at the endo of the file @reboot /bin/sh /home/pi/start_lock.sh
+6.Give Executable Access to locker.py
+	6.1 - sudo chmod -x /home/pi/locker.py or sudo chmod 777 /home/pi/locker.py
 
-7.Give Executable Access to locker.py
-	7.1 - sudo chmod -x /home/pi/locker.py or sudo chmod 777 /home/pi/locker.py
+7.use the command line "python door_lock.py L" to Move the Servo to Lock Position for the first time For installation
+	7.1 - python door_lock.py L
 
+8.Start the program under /home/pi as python locker.py
+	8.1 - sudo python locker.py
 
-8.use the command line "python door_lock.py L" to Move the Servo to Lock Position for the first time For installation
-	8.1 - python door_lock.py L
-
-9.Start the program under /home/pi as python locker.py
-	9.1 - sudo python locker.py
-
-10.Scan the RFID key fobs and Edit the key data in card_data.json,
+9.Scan the RFID key fobs and Edit the key data in card_data.json,
 Whenever you scan a new key Fob it will print some card data such as
 [82,101,194,16,220] copy that from the output screen and update the card_data.json dictionary
 value or add a new value as you see fit.
-Reboot the Pi and the software will start working.
+
+10.Edit crontab
+	10.1 - crontab -e
+	10.2 - add the line at the end of the file	@reboot /bin/sh /home/pi/start_lock.sh
+
+11.Install Blynk, follow instructions from this link: http://help.blynk.cc/how-to-connect-different-hardware-with-blynk/raspberry-pi/how-to-install-nodejs-library-on-linux
+	11.1 - sudo npm install blynk-library -g
+	11.2 - sudo npm install onoff -g
+
+12.Install Blynk app on the smartphone
+	12.1 - Create new project with one virtual button
+	12.2 - Update the blynk.py file with the blynk autentication code
+	
+12.Edit /etc/rc.local
+	11.1 - sudo nano etc/rc.local
+	11.2 - add the line at the end of the file	su - pi -c '/usr/bin/vncserver :1' &
+
+12.Reboot the Pi and the software will start working.
