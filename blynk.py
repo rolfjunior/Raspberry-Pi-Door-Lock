@@ -3,7 +3,7 @@ import sys
 import os
 import BlynkLib
 
-BLYNK_AUTH = '6bdbb3cd244945fc8ba4f7e15b734ddf'
+BLYNK_AUTH = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 
 #Initialize Blynk
 blynk = BlynkLib.Blynk(BLYNK_AUTH)
