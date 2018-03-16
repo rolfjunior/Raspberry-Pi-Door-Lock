@@ -7,6 +7,7 @@ Control a door lock using Blynk app, Google Assistant, RFID  tags or buttons.
 
 #HOW TO INSTALL
 
+cChech if step 1 is necessary since it looks like the code uses only the pirc522 to read RFID tags.
 1.  Folow the steps on this link
 http://www.instructables.com/id/Raspberry-Pi-3-Model-B-MIFARE-RC522-RFID-Tag-Readi/
 	1.1 - sudo apt-get install python2.7-dev
@@ -26,19 +27,19 @@ https://github.com/ondryaso/pi-rc522
 3.Clone the code from git and copy all the files in your raspberry pi under /home/pi
 	3.1 - sudo git clone https://github.com/rolfjunior/Raspberry-Pi-Door-Lock
   
-4.A XXXXXX folder will be created with the files inside of it move the files to /home/pi
+4.A XXXXXX folder will be created with the files inside of it move the files to /home/pi/Raspberry-Pi-Door-Lock
 Using file manager do copy and paste or
-	4.1 - sudo cp /home/pi/door_lock_pi/locker.py /home/pi/
-	4.2 - sudo cp /home/pi/door_lock_pi/start_lock.sh /home/pi/
-	4.3 - sudo cp /home/pi/door_lock_pi/card_data.json /home/pi/
-	4.4 - sudo cp /home/pi/door_lock_pi/door_lock.py /home/pi/
-	4.5 - sudo cp /home/pi/door_lock_pi/servolock.py /home/pi/
-	4.6 - sudo cp /home/pi/door_lock_pi/blynk.py /home/pi/
-	4.7 - sudo cp /home/pi/door_lock_pi/lockstate.pickle /home/pi/
+	4.1 - sudo cp /home/pi//Raspberry-Pi-Door-Lock/locker.py /home/pi/
+	4.2 - sudo cp /home/pi//Raspberry-Pi-Door-Lock/start_lock.sh /home/pi/
+	4.3 - sudo cp /home/pi//Raspberry-Pi-Door-Lock/card_data.json /home/pi/
+	4.4 - sudo cp /home/pi//Raspberry-Pi-Door-Lock/door_lock.py /home/pi/
+	4.5 - sudo cp /home/pi//Raspberry-Pi-Door-Lock/servolock.py /home/pi/
+	4.6 - sudo cp /home/pi//Raspberry-Pi-Door-Lock/blynk.py /home/pi/
+	4.7 - sudo cp /home/pi//Raspberry-Pi-Door-Lock/lockstate.pickle /home/pi/
 
 5.Delete the files on the original folder
-	5.1 - to delete all sudo rm /home/pi/XXXXXX/*
-	5.2 - to delete one file sudo rm /home/pi/XXXXXXXX/door_lock.py
+	5.1 - to delete all sudo rm /home/pi//Raspberry-Pi-Door-Lock/*
+	5.2 - to delete one file sudo rm /home/pi//Raspberry-Pi-Door-Lock/door_lock.py
 
 6.Give Executable Access to locker.py
 	6.1 - sudo chmod -x /home/pi/locker.py or sudo chmod 777 /home/pi/locker.py
