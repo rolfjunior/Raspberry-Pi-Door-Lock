@@ -1,3 +1,4 @@
+#Verifies the door and lock status and locks or unlocks the door
 import RPi.GPIO as GPIO
 import time
 import sys
@@ -5,10 +6,12 @@ import cPickle as pickle
 
 pickle_filepath = "/home/pi/lockstate.pickle"
 
+GPIO.setwarnings(False)
+
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(8, GPIO.OUT)
-GPIO.setup(10, GPIO.OUT)
-GPIO.setup(12, GPIO.OUT)
+GPIO.setup(8, GPIO.OUT) #servo
+GPIO.setup(3, GPIO.OUT) #red led
+GPIO.setup(11, GPIO.OUT) #grenn led
 
 p = GPIO.PWM(8, 50)
 p.start(0)
@@ -29,12 +32,8 @@ if (str(sys.argv[1]) == "L"):
 			time.sleep(2.9) # sleep 1 second
 			doorstatus = "Closed"
 			lockstatus = "Locked"
-			with open(pickle_filepath, "wb") as pickle_handle:
-				pickle.dump(doorstatus, pickle_handle)
-				pickle.dump(lockstatus, pickle_handle)
-				pickle_handle.close()
-			GPIO.output(10,GPIO.HIGH)
-			GPIO.output(12,GPIO.LOW)
+			GPIO.output(3,GPIO.HIGH)
+			GPIO.output(11,GPIO.LOW)
 			print "Door Locked!\n"
 		else:
 			print "Door closed and already Locked, do nothing!\n"
@@ -47,15 +46,15 @@ elif(str(sys.argv[1]) == "U"):
 	if lockstatus == 'Locked':
 		print "UnLocking the door!"
 		p.ChangeDutyCycle(12.5) # turn towards 180 degree
-		time.sleep(3) # sleep 1 second
+		time.sleep(3) # sleep 3 second
 		doorstatus = "Closed"
 		lockstatus = "UnLocked"
-		with open(pickle_filepath, "wb") as pickle_handle:
-			pickle.dump(doorstatus, pickle_handle)
-			pickle.dump(lockstatus, pickle_handle)
-			pickle_handle.close()
-		GPIO.output(10,GPIO.LOW)
-		GPIO.output(12,GPIO.HIGH)
+		#with open(pickle_filepath, "wb") as pickle_handle:
+			#pickle.dump(doorstatus, pickle_handle)
+			#pickle.dump(lockstatus, pickle_handle)
+			#pickle_handle.close()
+		GPIO.output(3,GPIO.LOW)
+		GPIO.output(11,GPIO.HIGH)
 		print "Door UnLocked!\n"
 	elif lockstatus == "UnLocked":
 		print "Door already UnLocked, do nothing!\n"
@@ -65,6 +64,12 @@ elif(str(sys.argv[1]) == "U"):
 		
 		
 p.stop()
+with open(pickle_filepath, "wb") as pickle_handle:
+	pickle.dump(doorstatus, pickle_handle)
+	pickle.dump(lockstatus, pickle_handle)
+	pickle_handle.close()
+
+
 #GPIO.cleanup()
 
 #class Controlled:
