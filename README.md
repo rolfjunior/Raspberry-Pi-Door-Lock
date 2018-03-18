@@ -44,8 +44,8 @@ Whenever you scan a new key Fob it will print some card data such as [82,101,194
 8.Start the program under /home/pi as python locker.py
 	8.1 - sudo python locker.py
 
-9.use the command line "python door_lock.py L" to Move the Servo to Lock Position for the first time For installation
-	9.1 - python door_lock.py L
+9. Install screen program
+	9.1 - sudo apt-get install screen
 
 10.Edit crontab to autostart the program on boot
 	10.1 - crontab -e
