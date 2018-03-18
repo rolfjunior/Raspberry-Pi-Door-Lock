@@ -7,7 +7,10 @@ Control a door lock using Blynk app, Google Assistant, RFID  tags or buttons.
 
 #HOW TO INSTALL
 
-cChech if step 1 is necessary since it looks like the code uses only the pirc522 to read RFID tags.
+1. EUse the interactive menu to enable the SPI Interface.
+	1.1 - sudo raspi-config
+
+Chech if step 1 is necessary since it looks like the code uses only the pirc522 to read RFID tags.
 1.  Folow the steps on this link
 http://www.instructables.com/id/Raspberry-Pi-3-Model-B-MIFARE-RC522-RFID-Tag-Readi/
 	1.1 - sudo apt-get install python2.7-dev
@@ -22,7 +25,7 @@ http://www.instructables.com/id/Raspberry-Pi-3-Model-B-MIFARE-RC522-RFID-Tag-Rea
 https://github.com/ondryaso/pi-rc522
 	2.1 - git clone https://github.com/ondryaso/pi-rc522.git
 	2.2 - cd pi-rc522
-	2.3 - python setup.py install
+	2.3 - sudo python setup.py install
 
 3.Clone the code from git and copy all the files in your raspberry pi under /home/pi
 	3.1 - sudo git clone https://github.com/rolfjunior/Raspberry-Pi-Door-Lock
