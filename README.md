@@ -10,17 +10,6 @@ Control a door lock using Blynk app, Google Assistant, RFID  tags or buttons.
 1. Use the interactive menu to enable the SPI Interface.
 	1.1 - sudo raspi-config
 
-Chech if step 1 is necessary since it looks like the code uses only the pirc522 to read RFID tags.
-1.  Folow the steps on this link
-http://www.instructables.com/id/Raspberry-Pi-3-Model-B-MIFARE-RC522-RFID-Tag-Readi/
-	1.1 - sudo apt-get install python2.7-dev
-	1.2 - git clone https://github.com/lthiery/SPI-Py.git
-	1.3 - cd SPI-Py
-	1.4 - sudo python setup.py install
-	1.5 - git clone https://github.com/mxgxw/MFRC522-python.git
-	1.6 - cd MFRC522-python
-	1.7 - python Read.py
-
 2. Install pirc522 from this link 
 https://github.com/ondryaso/pi-rc522
 	2.1 - git clone https://github.com/ondryaso/pi-rc522.git
@@ -30,7 +19,7 @@ https://github.com/ondryaso/pi-rc522
 3.Clone the code from git and copy all the files in your raspberry pi under /home/pi
 	3.1 - sudo git clone https://github.com/rolfjunior/Raspberry-Pi-Door-Lock
   
-4.A XXXXXX folder will be created with the files inside of it move the files to /home/pi/Raspberry-Pi-Door-Lock
+4.A Raspberry-Pi-Door-Lock folder will be created with the files inside of it, move the files to /home/pi/
 Using file manager do copy and paste or
 	4.1 - sudo cp /home/pi//Raspberry-Pi-Door-Lock/locker.py /home/pi/
 	4.2 - sudo cp /home/pi//Raspberry-Pi-Door-Lock/start_lock.sh /home/pi/
@@ -46,19 +35,19 @@ Using file manager do copy and paste or
 
 6.Give Executable Access to locker.py
 	6.1 - sudo chmod -x /home/pi/locker.py or sudo chmod 777 /home/pi/locker.py
-
-7.use the command line "python door_lock.py L" to Move the Servo to Lock Position for the first time For installation
-	7.1 - python door_lock.py L
+	
+7. Read tags number and add them to the autorized tags list. Scan the RFID key fobs and Edit the key data in card_data.json,
+Whenever you scan a new key Fob it will print some card data such as [82,101,194,16,220] copy that from the output screen and update the card_data.json dictionary value or add a new value as you see fit.
+	7.1 - python locker.py
+	7.2 - sudo nano card_data.json
 
 8.Start the program under /home/pi as python locker.py
 	8.1 - sudo python locker.py
 
-9.Scan the RFID key fobs and Edit the key data in card_data.json,
-Whenever you scan a new key Fob it will print some card data such as
-[82,101,194,16,220] copy that from the output screen and update the card_data.json dictionary
-value or add a new value as you see fit.
+9.use the command line "python door_lock.py L" to Move the Servo to Lock Position for the first time For installation
+	9.1 - python door_lock.py L
 
-10.Edit crontab
+10.Edit crontab to autostart the program on boot
 	10.1 - crontab -e
 	10.2 - add the line at the end of the file	@reboot /bin/sh /home/pi/start_lock.sh
 
@@ -69,6 +58,7 @@ value or add a new value as you see fit.
 12.Install Blynk app on the smartphone
 	12.1 - Create new project with one virtual button
 	12.2 - Update the blynk.py file with the blynk autentication code
+	12.3 - sudo nano blynk.py
 	
 12.Edit /etc/rc.local
 	11.1 - sudo nano etc/rc.local
