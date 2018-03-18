@@ -8,7 +8,7 @@ Control a door lock using Blynk app, Google Assistant, RFID  tags or buttons.
 #HOW TO INSTALL
 
 1. Use the interactive menu to enable the SPI Interface and VNC server.
-	1.1 - sudo raspi-config
+1.1 - sudo raspi-config
 
 2. Install pirc522 from this link 
 https://github.com/ondryaso/pi-rc522
