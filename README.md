@@ -7,7 +7,7 @@ Control a door lock using Blynk app, Google Assistant, RFID  tags or buttons.
 
 #HOW TO INSTALL
 
-1. Use the interactive menu to enable the SPI Interface.
+1. Use the interactive menu to enable the SPI Interface and VNC server.
 	1.1 - sudo raspi-config
 
 2. Install pirc522 from this link 
@@ -52,8 +52,12 @@ Whenever you scan a new key Fob it will print some card data such as [82,101,194
 	10.2 - add the line at the end of the file	@reboot /bin/sh /home/pi/start_lock.sh
 
 11.Install Blynk, follow instructions from this link: http://help.blynk.cc/how-to-connect-different-hardware-with-blynk/raspberry-pi/how-to-install-nodejs-library-on-linux
-	11.1 - sudo npm install blynk-library -g
-	11.2 - sudo npm install onoff -g
+	11.1 - sudo apt-get purge node nodejs node.js -y
+	11.2 - sudo apt-get autoremove
+	11.3 - curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+	11.4 - sudo apt-get install build-essential nodejs -y
+	11.5 - sudo npm install blynk-library -g
+	11.6 - sudo npm install onoff -g
 
 12.Install Blynk app on the smartphone
 	12.1 - Create new project with one virtual button
@@ -65,3 +69,4 @@ Whenever you scan a new key Fob it will print some card data such as [82,101,194
 	11.2 - add the line at the end of the file	su - pi -c '/usr/bin/vncserver :1' &
 
 12.Reboot the Pi and the software will start working.
+	12.1 - sudo reboot
