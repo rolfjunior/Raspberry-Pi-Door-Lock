@@ -58,6 +58,8 @@ Whenever you scan a new key Fob it will print some card data such as [82,101,194
 	11.4 - sudo apt-get install build-essential nodejs -y
 	11.5 - sudo npm install blynk-library -g
 	11.6 - sudo npm install onoff -g
+	
+	11.7 - pip install blynk-library-python to install blynk for python 
 
 12.Install Blynk app on the smartphone
 	12.1 - Create new project with one virtual button
