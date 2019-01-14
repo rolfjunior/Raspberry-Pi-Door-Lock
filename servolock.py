@@ -8,6 +8,10 @@ import cPickle as pickle
 
 pickle_filepath = "/home/pi/lockstate.pickle"
 
+with open(pickle_filepath, "rb") as pickle_handle:
+	doorstatus = pickle.load(pickle_handle)
+	lockstatus = pickle.load(pickle_handle)
+
 print "servolock initiated"
 
 GPIO.setwarnings(False)
@@ -26,7 +30,14 @@ class servolock:
 		GPIO.add_event_detect(7, GPIO.RISING, callback=self.lock)
 		GPIO.add_event_detect(13, GPIO.RISING, callback=self.unlock)
 		GPIO.add_event_detect(5, GPIO.BOTH, callback=self.sensor)
-				
+
+		if lockstatus == "Locked":
+			GPIO.output(3,GPIO.HIGH)
+			GPIO.output(11,GPIO.LOW)
+		else:
+			GPIO.output(3,GPIO.LOW)
+			GPIO.output(11,GPIO.HIGH)
+
 	def lock(self,channel):
 		self.time_now = time.time()
 		if(self.time_now - self.time_stamp) >= 0.3:	

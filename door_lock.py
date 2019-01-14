@@ -1,7 +1,9 @@
 #Verifies the door and lock status and locks or unlocks the door
 import RPi.GPIO as GPIO
 import time
+import threading
 import sys
+import os
 import cPickle as pickle
 
 pickle_filepath = "/home/pi/lockstate.pickle"
@@ -11,11 +13,10 @@ GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(8, GPIO.OUT) #servo
 GPIO.setup(3, GPIO.OUT) #red led
-GPIO.setup(11, GPIO.OUT) #grenn led
+GPIO.setup(5, GPIO.OUT) #grenn led
 
 p = GPIO.PWM(8, 50)
 p.start(0)
-
 
 with open(pickle_filepath, "rb") as pickle_handle:
 	doorstatus = pickle.load(pickle_handle)
@@ -33,7 +34,7 @@ if (str(sys.argv[1]) == "L"):
 			doorstatus = "Closed"
 			lockstatus = "Locked"
 			GPIO.output(3,GPIO.HIGH)
-			GPIO.output(11,GPIO.LOW)
+			GPIO.output(5,GPIO.LOW)
 			print "Door Locked!\n"
 		else:
 			print "Door closed and already Locked, do nothing!\n"
@@ -49,16 +50,11 @@ elif(str(sys.argv[1]) == "U"):
 		time.sleep(3) # sleep 3 second
 		doorstatus = "Closed"
 		lockstatus = "UnLocked"
-		#with open(pickle_filepath, "wb") as pickle_handle:
-			#pickle.dump(doorstatus, pickle_handle)
-			#pickle.dump(lockstatus, pickle_handle)
-			#pickle_handle.close()
 		GPIO.output(3,GPIO.LOW)
-		GPIO.output(11,GPIO.HIGH)
+		GPIO.output(5,GPIO.HIGH)
 		print "Door UnLocked!\n"
-	elif lockstatus == "UnLocked":
+        elif lockstatus == "UnLocked":
 		print "Door already UnLocked, do nothing!\n"
-#		lockstatus = "UnLocked"
 	else:
 		print "Unrecognized lockstatus, Error here!\n"
 		
@@ -68,18 +64,3 @@ with open(pickle_filepath, "wb") as pickle_handle:
 	pickle.dump(doorstatus, pickle_handle)
 	pickle.dump(lockstatus, pickle_handle)
 	pickle_handle.close()
-
-
-#GPIO.cleanup()
-
-#class Controlled:
-	#"""Class to control leds on or off according to lock status"""
-	#def __init__(self):
-	
-	#def ledsunlocked (self):
-		#GPIO.output(10,GPIO.LOW)
-		#GPIO.output(12,GPIO.HIGH)
-
-	#def ledslocked (self):
-		#GPIO.output(10,GPIO.HIGH)
-		#GPIO.output(12,GPIO.LOW)

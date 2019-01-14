@@ -1,8 +1,8 @@
 #!/bin/sh
 
-sleep 15
-screen -m -d -S fechadura
-screen -S fechadura -X stuff "sudo python /home/pi/locker.py & $(echo '\r')"
+sleep 10
+#screen -m -d -S fechadura
+#screen -S fechadura -X stuff "sudo python /home/pi/lockerv2.py & $(echo '\r')"
 
 
 screen -m -d -S blynk
