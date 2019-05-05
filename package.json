@@ -1,0 +1,16 @@
+{
+  "name": "pi",
+  "version": "1.0.0",
+  "description": "blynk",
+  "main": "index.js",
+  "dependencies": {
+    "blynk-library": "^0.4.7",
+    "onoff": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
