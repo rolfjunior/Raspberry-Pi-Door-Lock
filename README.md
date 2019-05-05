@@ -14,15 +14,17 @@ http://www.instructables.com/id/Raspberry-Pi-3-Model-B-MIFARE-RC522-RFID-Tag-Rea
 	1.2 - git clone https://github.com/lthiery/SPI-Py.git
 	1.3 - cd SPI-Py
 	1.4 - sudo python setup.py install
-	1.5 - git clone https://github.com/mxgxw/MFRC522-python.git
-	1.6 - cd MFRC522-python
-	1.7 - python Read.py
+	1.5 - cd
+	1.6 - git clone https://github.com/mxgxw/MFRC522-python.git
+	1.7 - cd MFRC522-python
+	1.8 - python Read.py
 
 2. Install pirc522 from this link 
 https://github.com/ondryaso/pi-rc522
 	2.1 - git clone https://github.com/ondryaso/pi-rc522.git
 	2.2 - cd pi-rc522
 	2.3 - python setup.py install
+	2.4 - cd
 
 3.Clone the code from git and copy all the files in your raspberry pi under /home/pi
 	3.1 - sudo git clone https://github.com/rolfjunior/Raspberry-Pi-Door-Lock
