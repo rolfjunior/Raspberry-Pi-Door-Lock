@@ -89,17 +89,23 @@ Using file manager do copy and paste or
 	11.1 - sudo npm install blynk-library -g
 	
 	11.2 - sudo npm install onoff -g
+	
+	For the raspberry pi zero w another methode for installing node js must be used
+	
+	11.1 - follow instructions on  http://help.blynk.cc/how-to-connect-different-hardware-with-blynk/raspberry-pi/how-to-install-nodejs-library-on-linux
 
 12.Install Blynk app on the smartphone
 
 	12.1 - Create new project with one virtual button
 	
-	12.2 - Update the blynk.py file with the blynk autentication code
+	12.2 - Update the blynk.py file with the blynk autentication code  sudo nano blynk.py
 	
 13.Edit /etc/rc.local
 
-	13.1 - sudo nano etc/rc.local
+	13.1 - sudo nano /etc/rc.local
 	
 	13.2 - add the line at the end of the file	su - pi -c '/usr/bin/vncserver :1' &
 
 14.Reboot the Pi and the software will start working.
+
+	14.1 - sudo reboot
