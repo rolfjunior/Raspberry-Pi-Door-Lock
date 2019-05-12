@@ -7,10 +7,19 @@ Control a door lock using Blynk app, Google Assistant, RFID  tags or buttons.
 
 #HOW TO INSTALL
 
-cChech if step 1 is necessary since it looks like the code uses only the pirc522 to read RFID tags.
+Check if step 1 is necessary since it looks like the code uses only the pirc522 to read RFID tags.
+This step is for reading NFC tags, but I couldn't make it work and therefore is not necessary if you don't need to use NFC to unlock or lock the door.
 1.  Folow the steps on this link http://www.instructables.com/id/Raspberry-Pi-3-Model-B-MIFARE-RC522-RFID-Tag-Readi/
 
-	1.1 - sudo apt-get install python2.7-dev
+	1.1 - raspi-config  ... Use the interactive menu to enable the SPI Interface
+	
+	1.2 - sudo reboot
+	
+	1.3 - sudo nano /boot/config.txt   ...check to see that the SPI Interface is enabled, Try to find a line that says: dtparam=spi=on If you see the above line then SPI is enabled
+	
+	1.4 - lsmod | grep spi   ...check to see that the spi_bcm2835 module is loaded
+	
+	1.1 - sudo apt-get install python2.7-dev   ...Install python2.7-dev:
 	
 	1.2 - git clone https://github.com/lthiery/SPI-Py.git
 	
@@ -26,13 +35,13 @@ cChech if step 1 is necessary since it looks like the code uses only the pirc522
 	
 	1.8 - python Read.py
 
-2. Install pirc522 from this link https://github.com/ondryaso/pi-rc522
+2. I couldn't make NFC reading work to unlock or lock the door. But the step is still necessary. Install pirc522 from this link https://github.com/ondryaso/pi-rc522
 
 	2.1 - git clone https://github.com/ondryaso/pi-rc522.git
 	
 	2.2 - cd pi-rc522
 	
-	2.3 - python setup.py install
+	2.3 - sudo python setup.py install
 	
 	2.4 - cd
 
@@ -40,7 +49,7 @@ cChech if step 1 is necessary since it looks like the code uses only the pirc522
 
 	3.1 - sudo git clone https://github.com/rolfjunior/Raspberry-Pi-Door-Lock
   
-4.A XXXXXX folder will be created with the files inside of it move the files to /home/pi/Raspberry-Pi-Door-Lock
+4.A folder will be created with the files inside of it move the files to /home/pi/Raspberry-Pi-Door-Lock
 Using file manager do copy and paste or
 
 	4.1 - sudo cp /home/pi//Raspberry-Pi-Door-Lock/locker.py /home/pi/
@@ -59,15 +68,21 @@ Using file manager do copy and paste or
 
 5.Delete the files on the original folder
 
-	5.1 - to delete all sudo rm /home/pi//Raspberry-Pi-Door-Lock/*
+	5.1 - sudo rm /home/pi//Raspberry-Pi-Door-Lock/*   ...to delete all
 	
-	5.2 - to delete one file sudo rm /home/pi//Raspberry-Pi-Door-Lock/door_lock.py
+	5.2 - sudo rm /home/pi//Raspberry-Pi-Door-Lock/door_lock.py   ...to delete one file 
 
 6.Give Executable Access to locker.py
 
 	6.1 - sudo chmod -x /home/pi/locker.py or sudo chmod 777 /home/pi/locker.py
+	
+7. Install screen to run program in a diferent screen
 
-7.use the command line "python door_lock.py L" to Move the Servo to Lock Position for the first time For installation
+	7.1 - sudo apt-get install screen
+	
+	7.2 - use screen -list to see a list of runing screens
+
+7. Use the command line "python door_lock.py L" to Move the Servo to Lock Position for the first time For installation
 
 	7.1 - python door_lock.py L
 
@@ -78,11 +93,11 @@ Using file manager do copy and paste or
 9.Scan the RFID key fobs and Edit the key data in card_data.json, Whenever you scan a new key Fob it will print some card data such as
 [82,101,194,16,220] copy that from the output screen and update the card_data.json dictionary value or add a new value as you see fit.
 
-10.Edit crontab
+10.Edit crontab. This is to start up the lock program during raspberry boot
 
 	10.1 - crontab -e
 	
-	10.2 - add the line at the end of the file	@reboot /bin/sh /home/pi/start_lock.sh
+	10.2 - add the line at the end of the file without #    	@reboot /bin/sh /home/pi/start_lock.sh
 
 11.Install Blynk, follow instructions from this link: http://help.blynk.cc/how-to-connect-different-hardware-with-blynk/raspberry-pi/how-to-install-nodejs-library-on-linux
 
@@ -100,7 +115,7 @@ Using file manager do copy and paste or
 	
 	12.2 - Update the blynk.py file with the blynk autentication code  sudo nano blynk.py
 	
-13.Edit /etc/rc.local
+13.Edit /etc/rc.local. This will make VNC server to be prepared at boot for remote access
 
 	13.1 - sudo nano /etc/rc.local
 	
