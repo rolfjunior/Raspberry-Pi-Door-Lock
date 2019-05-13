@@ -65,6 +65,10 @@ Using file manager do copy and paste or
 	4.6 - sudo cp /home/pi//Raspberry-Pi-Door-Lock/blynk.py /home/pi/
 	
 	4.7 - sudo cp /home/pi//Raspberry-Pi-Door-Lock/lockstate.pickle /home/pi/
+	
+	4.8 - sudo cp /home/pi//Raspberry-Pi-Door-Lock/lockstate.pickle /createpickle.py
+	
+	4.8 - sudo rm -r /home/pi//Raspberry-Pi-Door-Lock
 
 5.Delete the files on the original folder
 
@@ -76,6 +80,11 @@ Using file manager do copy and paste or
 
 	6.1 - sudo chmod -x /home/pi/locker.py or sudo chmod 777 /home/pi/locker.py
 	
+7.Give Executable Access to lockstate.pickle
+
+	6.1 - sudo chmod -x /home/pi/lockstate.pickle or sudo chmod 777 /home/pi/lockstate.pickle
+	
+	
 7. Install screen to run program in a diferent screen
 
 	7.1 - sudo apt-get install screen
@@ -86,7 +95,7 @@ Using file manager do copy and paste or
 
 	7.1 - python door_lock.py L
 
-8.Start the program under /home/pi as python locker.py
+8.Start the program
 
 	8.1 - sudo python locker.py
 
@@ -109,11 +118,14 @@ Using file manager do copy and paste or
 	
 	11.1 - follow instructions on  http://help.blynk.cc/how-to-connect-different-hardware-with-blynk/raspberry-pi/how-to-install-nodejs-library-on-linux
 
+	11.4 - sudo pip install blynk-library-python
+	
 12.Install Blynk app on the smartphone
 
 	12.1 - Create new project with one virtual button
 	
 	12.2 - Update the blynk.py file with the blynk autentication code  sudo nano blynk.py
+	
 	
 13.Edit /etc/rc.local. This will make VNC server to be prepared at boot for remote access
 
