@@ -9,6 +9,14 @@ Control a door lock using Blynk app, Google Assistant, RFID  tags or buttons.
 
 Check if step 1 is necessary since it looks like the code uses only the pirc522 to read RFID tags.
 This step is for reading NFC tags, but I couldn't make it work and therefore is not necessary if you don't need to use NFC to unlock or lock the door.
+
+13.Edit /etc/rc.local. This will make VNC server to be prepared at boot for remote access
+
+	13.1 - sudo nano /etc/rc.local
+	
+	13.2 - add the line at the end of the file	su - pi -c '/usr/bin/vncserver :1' &
+
+
 1.  Folow the steps on this link http://www.instructables.com/id/Raspberry-Pi-3-Model-B-MIFARE-RC522-RFID-Tag-Readi/
 
 	1.1 - raspi-config  ... Use the interactive menu to enable the SPI Interface
@@ -126,13 +134,6 @@ Using file manager do copy and paste or
 	
 	12.2 - Update the blynk.py file with the blynk autentication code  sudo nano blynk.py
 	
-	
-13.Edit /etc/rc.local. This will make VNC server to be prepared at boot for remote access
-
-	13.1 - sudo nano /etc/rc.local
-	
-	13.2 - add the line at the end of the file	su - pi -c '/usr/bin/vncserver :1' &
-
 14.Reboot the Pi and the software will start working.
 
 	14.1 - sudo reboot
